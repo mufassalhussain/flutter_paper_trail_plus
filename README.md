@@ -1,7 +1,6 @@
 # flutter_paper_trail_plus
 
-Send logs to Papertrail
-
+Elevate your app development experience with Flutter Paper Trail Plus. Seamlessly integrate advanced logging and real-time monitoring into your Flutter project. Swiftly identify and prioritize issues with enhanced logging, customizable outputs, and error notifications. Utilize the power of data insights and security while simplifying the debugging process. Choose Flutter PaperTrail Plus for efficient, streamlined, and proactive app maintenance.
 
 # Usage
 
