@@ -1,0 +1,23 @@
+name: flutter_paper_trail_plus
+description: A flutter plugin for PaperTrail logging service
+version: 0.0.1
+
+# homepage: https://github.com/metaflowltd/flutter_paper_trail
+
+dependencies:
+  meta: 
+  flutter:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://www.dartlang.org/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  plugin:
+    androidPackage: com.mufassal.flutterpapertrailplus
+    pluginClass: FlutterPaperTrailPlusPlugin
+
+
+environment:
+  sdk: ">=2.13.0 <3.0.0"
