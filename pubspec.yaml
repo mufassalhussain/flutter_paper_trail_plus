@@ -2,8 +2,7 @@ name: flutter_paper_trail_plus
 description: A flutter plugin for PaperTrail logging service
 version: 0.0.1
 
-# homepage: https://github.com/metaflowltd/flutter_paper_trail
-
+homepage: https://github.com/mufassalhussain/flutter_paper_trail_plus
 dependencies:
   meta: 
   flutter:
