@@ -1,6 +1,6 @@
 name: flutter_paper_trail_plus
-description: Elevate your app development experience with Flutter Paper Trail Plus. Seamlessly integrate advanced logging and real-time monitoring into your Flutter project. Swiftly identify and prioritize issues with enhanced logging, customizable outputs, and error notifications. 
-version: 0.0.3
+description: Elevate your app development experience with Flutter Paper Trail Plus. Seamlessly integrate advanced logging and real-time monitoring into your Flutter project. Swiftly identify and prioritize issues with enhanced logging, customizable outputs, and error notifications.
+version: 0.0.4
 
 homepage: https://github.com/mufassalhussain/flutter_paper_trail_plus
 dependencies:
