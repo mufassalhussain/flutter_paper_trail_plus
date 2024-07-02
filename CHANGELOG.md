@@ -9,4 +9,5 @@ fixed iOS build issue
 
 ## 0.0.4
 
-update Android kotlin version
+- update Android kotlin version
+- compatibility with newer flutter version

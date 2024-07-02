@@ -20,6 +20,24 @@ class S implements WidgetsLocalizations {
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get reorderItemDown => 'Move down';
+
+  @override
+  String get reorderItemLeft => 'Move left';
+
+  @override
+  String get reorderItemRight => 'Move right';
+
+  @override
+  String get reorderItemToEnd => 'Move to end';
+
+  @override
+  String get reorderItemToStart => 'Move to start';
+
+  @override
+  String get reorderItemUp => 'Move up';
 }
 
 class $en extends S {
