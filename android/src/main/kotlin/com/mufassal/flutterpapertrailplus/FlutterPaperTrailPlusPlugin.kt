@@ -6,10 +6,8 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import io.flutter.plugin.common.PluginRegistry.Registrar
-import me.jagdeep.papertrail.timber.PapertrailTree
 import timber.log.Timber
-
+import me.jagdeep.papertrail.timber.PapertrailTree
 
 class FlutterPaperTrailPlusPlugin : MethodCallHandler, FlutterPlugin {
 
@@ -21,7 +19,7 @@ class FlutterPaperTrailPlusPlugin : MethodCallHandler, FlutterPlugin {
     companion object {
         @JvmStatic
         @SuppressWarnings("deprecation")
-        fun registerWith(registrar: Registrar) {
+        fun registerWith(registrar: io.flutter.plugin.common.PluginRegistry.Registrar) {
             val plugin = FlutterPaperTrailPlusPlugin()
             plugin.onAttachedToEngine(registrar.messenger())
         }
@@ -37,12 +35,9 @@ class FlutterPaperTrailPlusPlugin : MethodCallHandler, FlutterPlugin {
     }
 
     private fun onAttachedToEngine(messenger: BinaryMessenger) {
-        channel = MethodChannel(
-            messenger,
-            "flutter_paper_trail_plus")
-            .apply {
-                setMethodCallHandler(this@FlutterPaperTrailPlusPlugin)
-            }
+        channel = MethodChannel(messenger, "flutter_paper_trail_plus").apply {
+            setMethodCallHandler(this@FlutterPaperTrailPlusPlugin)
+        }
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {
@@ -55,20 +50,12 @@ class FlutterPaperTrailPlusPlugin : MethodCallHandler, FlutterPlugin {
     }
 
     private fun configureUserAndParseArguments(call: MethodCall, result: Result) {
-        if (call.arguments !is Map<*, *>) {
+        val arguments = call.arguments as? Map<*, *> ?: run {
             result.error("missing arguments", "", null)
             return
         }
 
-        val arguments = call.arguments as Map<*, *>?
-
-        if (arguments == null) {
-            result.error("missing arguments", "", null)
-            return
-        }
-
-        val userId = arguments["userId"] as String?
-        if (userId == null) {
+        val userId = arguments["userId"] as? String ?: run {
             result.error("missing argument userId", "", null)
             return
         }
@@ -86,26 +73,17 @@ class FlutterPaperTrailPlusPlugin : MethodCallHandler, FlutterPlugin {
     }
 
     private fun logAndParseArguments(call: MethodCall, result: Result) {
-        if (call.arguments !is Map<*, *>) {
+        val arguments = call.arguments as? Map<*, *> ?: run {
             result.error("missing arguments", "", null)
             return
         }
 
-        val arguments = call.arguments as Map<*, *>?
-
-        if (arguments == null) {
-            result.error("missing arguments", "", null)
-            return
-        }
-
-        val message = arguments["message"] as String?
-        if (message == null) {
+        val message = arguments["message"] as? String ?: run {
             result.error("missing argument message", "", null)
             return
         }
 
-        val logLevel = arguments["logLevel"] as String?
-        if (logLevel == null) {
+        val logLevel = arguments["logLevel"] as? String ?: run {
             result.error("missing argument logLevel", "", null)
             return
         }
@@ -122,46 +100,32 @@ class FlutterPaperTrailPlusPlugin : MethodCallHandler, FlutterPlugin {
     }
 
     private fun initLoggerAndParseArguments(call: MethodCall, result: Result) {
-        if (call.arguments !is Map<*, *>) {
+        val arguments = call.arguments as? Map<*, *> ?: run {
             result.error("missing arguments", "", null)
             return
         }
 
-        val arguments = call.arguments as Map<*, *>?
-
-        if (arguments == null) {
+        val hostName = arguments["hostName"] as? String ?: run {
             result.error("missing arguments", "", null)
             return
         }
 
-        val hostName = arguments["hostName"] as String?
-        if (hostName == null) {
-            result.error("missing arguments", "", null)
-            return
-        }
-
-        val machineName = arguments["machineName"] as String?
-        if (machineName == null) {
+        val machineName = arguments["machineName"] as? String ?: run {
             result.error("missing argument machineName", "", null)
             return
         }
 
-        val portString = arguments["port"] as String?
-        if (portString == null) {
+        val portString = arguments["port"] as? String ?: run {
             result.error("missing argument port", "", null)
             return
         }
 
-        val port =
-            try {
-                portString.toInt()
-            } catch (e: Exception) {
-                result.error("port is not a number", "", null)
-                return
-            }
+        val port = portString.toIntOrNull() ?: run {
+            result.error("port is not a number", "", null)
+            return
+        }
 
-        programName = arguments["programName"] as String?
-        if (programName == null) {
+        programName = arguments["programName"] as? String ?: run {
             result.error("missing argument programName", "", null)
             return
         }
@@ -189,4 +153,3 @@ class FlutterPaperTrailPlusPlugin : MethodCallHandler, FlutterPlugin {
         return re.replace(stringToClean, "")
     }
 }
-
