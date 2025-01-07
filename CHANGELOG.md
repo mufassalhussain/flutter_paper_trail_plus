@@ -16,3 +16,12 @@ fixed iOS build issue
 
 - update Android
 - improvements
+
+## 1.0.0
+
+- Built-in retry mechanism ensures delivery of logs even during temporary network issues.
+- Resolved crashes when invalid arguments were passed to initLogger.
+- Handled missing arguments gracefully with clear error messages.
+- Prevented log delivery failures during transient network issues with a retry mechanism.
+
+
