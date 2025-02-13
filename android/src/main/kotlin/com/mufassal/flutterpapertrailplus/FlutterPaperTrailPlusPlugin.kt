@@ -11,33 +11,19 @@ import me.jagdeep.papertrail.timber.PapertrailTree
 
 class FlutterPaperTrailPlusPlugin : MethodCallHandler, FlutterPlugin {
 
-    private var channel: MethodChannel? = null
+    private lateinit var channel: MethodChannel
     private var treeBuilder: PapertrailTree.Builder? = null
     private var tree: PapertrailTree? = null
     private var programName: String? = null
 
-    companion object {
-        @JvmStatic
-        @SuppressWarnings("deprecation")
-        fun registerWith(registrar: io.flutter.plugin.common.PluginRegistry.Registrar) {
-            val plugin = FlutterPaperTrailPlusPlugin()
-            plugin.onAttachedToEngine(registrar.messenger())
-        }
-    }
-
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        this.onAttachedToEngine(binding.binaryMessenger)
+        val messenger = binding.binaryMessenger
+        channel = MethodChannel(messenger, "flutter_paper_trail_plus")
+        channel.setMethodCallHandler(this)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        channel?.setMethodCallHandler(null)
-        channel = null
-    }
-
-    private fun onAttachedToEngine(messenger: BinaryMessenger) {
-        channel = MethodChannel(messenger, "flutter_paper_trail_plus").apply {
-            setMethodCallHandler(this@FlutterPaperTrailPlusPlugin)
-        }
+        channel.setMethodCallHandler(null)
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {

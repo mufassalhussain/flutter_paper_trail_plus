@@ -24,8 +24,19 @@ rootProject.allprojects {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty('android')) {
+            project.android {
+                if (namespace == null) {
+                    namespace project.group
+                }
+            }
+        }
+    }
+}
 android {
+    namespace="com.mufassal.flutterpapertrailplus"
     compileSdkVersion 34
 
     sourceSets {
